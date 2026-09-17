@@ -1,0 +1,48 @@
+-- Template: Visão Geral com Cards KPI e Tabela
+-- Exibe cards de indicadores principais em grid + tabela resumo
+
+VAR total_impactos = [Total Impactos]
+VAR total_saves = [Total Saves]
+VAR cobertura = FORMAT([Cobertura Monitoramento], "0.0%")
+VAR taxa_prev = FORMAT([Taxa Previsibilidade], "0.0%")
+VAR eventos_sem_rx = [Eventos Sem Emissao RX]
+VAR pend_qualidade = [Pendencias Qualidade]
+
+RETURN "
+<style>
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #F3F6FA; color: #061B43; margin: 0; padding: 8px; }
+.hdr { background: linear-gradient(90deg, #00183D, #06275A 45%, #0B4FA3); color: #fff; border-radius: 10px; padding: 12px 18px; margin-bottom: 12px; }
+.hdr h1 { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+.kpi { background: #fff; border-radius: 8px; padding: 10px 12px; box-shadow: 0 1px 3px rgba(6,39,90,.1); }
+.kpi .label { font-size: 10px; text-transform: uppercase; color: #717A7F; letter-spacing: .5px; }
+.kpi .value { font-size: 22px; font-weight: 800; color: #06275A; margin-top: 2px; }
+.kpi.red .value { color: #DC2626; }
+.kpi.blue .value { color: #2563EB; }
+.kpi.green .value { color: #16A34A; }
+.kpi.orange .value { color: #D97706; }
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(6,39,90,.1); }
+thead th { background: #06275A; color: #fff; font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 6px 8px; text-align: center; }
+tbody td { padding: 4px 8px; border-bottom: 1px solid #E6EAF1; text-align: center; font-weight: 600; font-size: 11px; }
+</style>
+<div class='hdr'><h1>Visão Geral</h1></div>
+<div class='kpi-grid'>
+  <div class='kpi red'><div class='label'>Total Impactos</div><div class='value'>" & total_impactos & "</div></div>
+  <div class='kpi blue'><div class='label'>Total Saves</div><div class='value'>" & total_saves & "</div></div>
+  <div class='kpi green'><div class='label'>Cobertura Monitoramento</div><div class='value'>" & cobertura & "</div></div>
+  <div class='kpi green'><div class='label'>Taxa Previsibilidade</div><div class='value'>" & taxa_prev & "</div></div>
+  <div class='kpi orange'><div class='label'>Eventos Sem Emissão RX</div><div class='value'>" & eventos_sem_rx & "</div></div>
+  <div class='kpi red'><div class='label'>Pendências Qualidade</div><div class='value'>" & pend_qualidade & "</div></div>
+</div>
+<table>
+  <thead><tr><th>Indicador</th><th>Valor</th></tr></thead>
+  <tbody>
+    <tr><td>Total Impactos</td><td>" & total_impactos & "</td></tr>
+    <tr><td>Total Saves</td><td>" & total_saves & "</td></tr>
+    <tr><td>Cobertura</td><td>" & cobertura & "</td></tr>
+    <tr><td>Previsibilidade</td><td>" & taxa_prev & "</td></tr>
+    <tr><td>Eventos Sem RX</td><td>" & eventos_sem_rx & "</td></tr>
+  </tbody>
+</table>
+"
